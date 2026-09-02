@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+/*
+  Design system
+  -------------
+  This is a developer tool, so it is dark-first, like an editor or a
+  terminal — with light mode built as a full, equally-considered
+  alternative rather than an afterthought.
+
+  The signature interaction is the "keycap": every pressable surface
+  (buttons, badges, virtual keys) gets a solid bottom "shelf" that visually
+  compresses when pressed or active. The accent color (amber) is a direct
+  reference to a keyboard's own indicator LEDs — Caps Lock, Num Lock — so a
+  passed key or an active state reads as "the light is on", not as a
+  decorative color choice.
+*/
+
+:root {
+  --color-ink: #0a0c10;
+  --color-surface: #12151c;
+  --color-surface-raised: #1a1e26;
+  --color-mist: #262b35;
+  --color-paper: #e9ebef;
+  --color-muted: #8d93a0;
+
+  --color-amber: #e8a33d;
+  --color-amber-soft: rgba(232, 163, 61, 0.28);
+  --color-mint: #3ecf8e;
+  --color-mint-soft: rgba(62, 207, 142, 0.24);
+  --color-danger: #ef5350;
+  --color-danger-soft: rgba(239, 83, 80, 0.24);
+  --color-info: #5b8def;
+
+  --shadow-key: 0 2px 0 0 var(--color-mist), 0 8px 16px -8px rgba(0, 0, 0, 0.6);
+  --shadow-key-pressed: 0 0 0 0 var(--color-mist), 0 2px 6px -2px rgba(0, 0, 0, 0.5);
+  --color-overlay: rgba(6, 7, 10, 0.8);
+  color-scheme: dark;
+}
+
+:root.light {
+  --color-ink: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-mist: #dde1e7;
+  --color-paper: #14161b;
+  --color-muted: #5c6270;
+
+  --color-amber: #b9760a;
+  --color-amber-soft: rgba(185, 118, 10, 0.16);
+  --color-mint: #0f9d68;
+  --color-mint-soft: rgba(15, 157, 104, 0.16);
+  --color-danger: #d0433f;
+  --color-danger-soft: rgba(208, 67, 63, 0.16);
+  --color-info: #3868c9;
+
+  --shadow-key: 0 2px 0 0 var(--color-mist), 0 6px 14px -10px rgba(20, 22, 27, 0.35);
+  --shadow-key-pressed: 0 0 0 0 var(--color-mist), 0 2px 4px -2px rgba(20, 22, 27, 0.3);
+  --color-overlay: rgba(20, 22, 27, 0.5);
+  color-scheme: light;
+}
+
+* {
+  border-color: var(--color-mist);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible, consistent focus ring for every interactive element — keyboard
+   navigation must never be an afterthought on a keyboard-testing tool. */
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background-color: var(--color-amber-soft);
+}
+
+/* The keycap shelf — shared by virtual keys, buttons, and badges that want
+   the same tactile identity. */
+.keycap {
+  box-shadow: var(--shadow-key);
+  transition: transform 80ms ease-out, box-shadow 80ms ease-out, background-color 120ms ease-out,
+    border-color 120ms ease-out;
+}
+
+.keycap:active,
+.keycap[data-pressed="true"] {
+  transform: translateY(2px);
+  box-shadow: var(--shadow-key-pressed);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-mist) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--color-mist);
+  border-radius: 999px;
+}
